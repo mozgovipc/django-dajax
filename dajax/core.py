@@ -52,8 +52,5 @@ class Dajax(object):
 
 
     def _clean(self, data):
-        if hasattr(data, '__iter__'):
-            return map(self._clean, data)
-        else:
-            return unicode(data).replace('\n', '').replace('\r', '')
+        return str(data).replace('\n', '').replace('\r', '')
 
