@@ -45,3 +45,15 @@ class Dajax(object):
 
     def add_data(self, data, function):
         self.calls.append({'cmd': 'data', 'val': data, 'fun': function})
+
+
+    def html(self, id, value):
+        self.calls.append({'cmd': 'html', 'id': id, 'val': self._clean(value)})
+
+
+    def _clean(self, data):
+        if hasattr(data, '__iter__'):
+            return map(self._clean, data)
+        else:
+            return unicode(data).replace('\n', '').replace('\r', '')
+
