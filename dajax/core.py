@@ -13,7 +13,9 @@ class Dajax(object):
         self.calls.append({'cmd': 'alert', 'val': message})
 
     def assign(self, id, attribute, value):
-        self.calls.append({'cmd': 'as', 'id': id, 'prop': attribute, 'val': value})
+        if isinstance(value, bytes):
+            value = value.decode("utf-8")
+        self.calls.append({'cmd': 'as', 'id': id, 'prop': attribute, 'val': str(value)})
 
     def add_css_class(self, id, value):
         if not hasattr(value, '__iter__'):
